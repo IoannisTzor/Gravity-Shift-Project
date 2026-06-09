@@ -10,7 +10,7 @@ public class TargetBehavior : MonoBehaviour
 		if (other.gameObject.tag == "Player")
         {
             //add score
-            GameManager.Instance.AddCoin();
+            GameManager.Instance.addCoin();
             
             // destroy self
             Destroy(gameObject);
