@@ -1,25 +1,33 @@
-using System.Numerics;
-using System.Security;
 using UnityEngine;
 
 public class BoundaryCheck : MonoBehaviour
 {
-    public GameObject Player;
-    public float CamSize = 5f;
+    public GameObject player;
+    public float buffer = 3f;          // grace distance beyond the screen edge
 
+    private float camHalfWidth;
+    private float camHalfHeight;
 
-    // Update is called once per frame
+    void Start()
+    {
+        camHalfHeight = Camera.main.orthographicSize;
+        camHalfWidth  = camHalfHeight * Camera.main.aspect;
+    }
+
     void Update()
     {
-        if (Player.transform.position.x < transform.position.x - (2*CamSize+5))
+        Vector2 playerPos = player.transform.position;
+
+        if (playerPos.x < transform.position.x - (camHalfWidth + buffer))
         {
             GameManager.Instance.GameOver();
             return;
         }
-        if (Player.transform.position.y < transform.position.y - (CamSize+5) || Player.transform.position.y > transform.position.y + (CamSize+5))
+
+        if (playerPos.y < transform.position.y - (camHalfHeight + buffer) ||
+            playerPos.y > transform.position.y + (camHalfHeight + buffer))
         {
             GameManager.Instance.GameOver();
-            return;
         }
     }
 }
