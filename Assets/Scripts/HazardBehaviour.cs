@@ -15,8 +15,9 @@ public class HazardBehavior : MonoBehaviour
             GameManager.Instance.GameOver();
         
             // destroy player
-            //add explosion
+            
             Destroy(other.gameObject);
+            //add explosion
 	    }
     }
 
