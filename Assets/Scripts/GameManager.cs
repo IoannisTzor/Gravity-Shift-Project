@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private float coinValue = 1f; 
 
     private float coinScore = 0f;
+    private float Score = 0f;
 
     void Awake()
     {
@@ -23,6 +24,10 @@ public class GameManager : MonoBehaviour
             survivalTime += Time.deltaTime;
         }
     }
+    public void addCoin()
+    {
+        coinScore +=  coinValue;
+    }
 
     public void GameOver()               
     {
@@ -34,14 +39,14 @@ public class GameManager : MonoBehaviour
     {
         return isGameOver;
     }
-    
+    public float ScoreGet()
+    {
+        return survivalTime + coinScore * 5;
+    }
     public float CoinScore()
     {
         return coinScore;
     }
-    public void addCoin()
-    {
-        coinScore +=  coinValue;
-    }
+
 
 }
