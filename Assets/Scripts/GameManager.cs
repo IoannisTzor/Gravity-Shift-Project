@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     private float coinValue = 1f; 
 
     private float coinScore = 0f;
-    private float Score = 0f;
 
     void Awake()
     {
@@ -33,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver) return;
         isGameOver = true;
+        UiManager.Instance.showGameOver();
         Debug.Log("Game Over! Survived: " + survivalTime + " seconds and collected "+ coinScore + " coins" );
     }
     public bool IsGameOver()
