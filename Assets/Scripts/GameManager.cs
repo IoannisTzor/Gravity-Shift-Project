@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     private float coinScore = 0f;
     public GameObject player;
+    public GameObject explosion;
 
     void Awake()
     {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
         isGameOver = true;
         UiManager.Instance.showGameOver();
+        Instantiate(explosion, player.transform.position, Quaternion.identity);
         Destroy(player);
         Debug.Log("Game Over! Survived: " + survivalTime + " seconds and collected "+ coinScore + " coins" );
     }
