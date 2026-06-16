@@ -4,6 +4,8 @@ using UnityEngine;
 public class gravityShift : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float baseSpeed =5f;
+    public float acceleration = 0.05f;
     public float flipCooldown = 0.5f;
 
     private Rigidbody2D rb;
@@ -17,6 +19,7 @@ public class gravityShift : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        moveSpeed = baseSpeed + GameManager.Instance.ScoreGet() * acceleration;
         handleMovement();
         handleGravityFlip();
     }
