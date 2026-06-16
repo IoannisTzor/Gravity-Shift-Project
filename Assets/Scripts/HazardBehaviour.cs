@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class HazardBehavior : MonoBehaviour
 {
@@ -14,10 +13,6 @@ public class HazardBehavior : MonoBehaviour
         {
             GameManager.Instance.GameOver();
         
-            // destroy player
-            
-            Destroy(other.gameObject);
-            //add explosion
 	    }
     }
 

@@ -16,6 +16,7 @@ public class BoundaryCheck : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.IsGameOver()) return;
         Vector2 playerPos = player.transform.position;
 
         if (playerPos.x < transform.position.x - (camHalfWidth + buffer))
