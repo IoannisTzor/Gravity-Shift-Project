@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class UiManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
@@ -26,5 +26,9 @@ public class UiManager : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         finalScoreText.text = "Final Score: "+ Mathf.FloorToInt(GameManager.Instance.ScoreGet());
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
