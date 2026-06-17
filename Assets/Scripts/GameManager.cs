@@ -33,6 +33,12 @@ public class GameManager : MonoBehaviour
     public void GameOver()               
     {
         if (isGameOver) return;
+        float finalScore = ScoreGet();
+        if (finalScore > PlayerPrefs.GetFloat("HighScore", 0f))
+        {
+            PlayerPrefs.SetFloat("HighScore", finalScore);
+            PlayerPrefs.Save();
+        }
         isGameOver = true;
         UiManager.Instance.showGameOver();
         Instantiate(explosion, player.transform.position, Quaternion.identity);

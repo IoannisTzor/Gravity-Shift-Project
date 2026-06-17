@@ -5,6 +5,7 @@ public class UiManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI finalScoreText;
+    public TextMeshProUGUI highScoreText;
     public static UiManager Instance;
     public GameObject gameOverPanel;
     
@@ -24,7 +25,9 @@ public class UiManager : MonoBehaviour
     }
     public void showGameOver()
     {
+
         gameOverPanel.SetActive(true);
+        highScoreText.text = "High Score: "+ Mathf.FloorToInt(PlayerPrefs.GetFloat("HighScore", 0f));
         finalScoreText.text = "Final Score: "+ Mathf.FloorToInt(GameManager.Instance.ScoreGet());
     }
     public void RestartGame()
