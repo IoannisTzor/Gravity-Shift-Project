@@ -34,7 +34,7 @@ public class PlatformDecorator : MonoBehaviour
             }
         if (roll1 >= 70)
             {
-                Instantiate(HazardPrefab, new Vector2(spikeX ,(transform.position.y + PlatHeight * ySign) - 0.10f),rotation);
+                Instantiate(HazardPrefab, new Vector2(spikeX ,(transform.position.y + (PlatHeight - 0.10f) * ySign) ),rotation);
                 while (Mathf.Abs(coinX - spikeX)< minGap && retries < 100)
                     {
                     coinX = Random.Range(transform.position.x - PlatWidth, transform.position.x + PlatWidth);
