@@ -1,14 +1,17 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 public class UiManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI timerText;
     public static UiManager Instance;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
+    public GameObject timerPanel;
     private bool isPaused;
     
 
@@ -21,7 +24,9 @@ public class UiManager : MonoBehaviour
     void Start()
     {
      gameOverPanel.SetActive(false);
-     pausePanel.SetActive(false);   
+     pausePanel.SetActive(false); 
+     timerPanel.SetActive(false); 
+       
     }
     
     public void PauseGame()
@@ -35,9 +40,24 @@ public class UiManager : MonoBehaviour
     {
         //add a timer
         pausePanel.SetActive(false);
-        isPaused = false;
-        Time.timeScale = 1f;
+        StartCoroutine(ResumeCountdown());
     }
+
+    IEnumerator ResumeCountdown()
+{
+    // show countdownText
+    timerPanel.SetActive(true);
+    timerText.text = "Starting in: 3";
+    yield return new WaitForSecondsRealtime(1f);
+    timerText.text = "Starting in: 2";
+    yield return new WaitForSecondsRealtime(1f);
+    timerText.text = "Starting in: 1";
+    yield return new WaitForSecondsRealtime(1f);
+    timerPanel.SetActive(false);
+    Time.timeScale = 1f;
+    isPaused = false;
+
+}
 
     public void QuitGame()
     {
