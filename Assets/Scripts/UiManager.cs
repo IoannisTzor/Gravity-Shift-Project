@@ -9,7 +9,7 @@ public class UiManager : MonoBehaviour
     public static UiManager Instance;
     public GameObject gameOverPanel;
     public GameObject pausePanel;
-    public bool isPaused;
+    private bool isPaused;
     
 
 
@@ -35,6 +35,7 @@ public class UiManager : MonoBehaviour
     {
         //add a timer
         pausePanel.SetActive(false);
+        isPaused = false;
         Time.timeScale = 1f;
     }
 
@@ -43,15 +44,9 @@ public class UiManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MenuScene");
     }
-    
-    // Update is called once per frame
-    void Update()
+    public void TogglePause()
     {
-        scoreText.text = "Score: "+ Mathf.FloorToInt(GameManager.Instance.ScoreGet());
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-        
-            if (isPaused)
+        if (isPaused)
             {
                 ResumeGame();
             }
@@ -59,6 +54,15 @@ public class UiManager : MonoBehaviour
             {
                 PauseGame();
             }
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        scoreText.text = "Score: "+ Mathf.FloorToInt(GameManager.Instance.ScoreGet());
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
         }
     }
     public void showGameOver()
