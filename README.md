@@ -83,9 +83,9 @@ The game is driven by a handful of focused scripts in `Assets/Scripts`, each wit
  
 Planned next features:
  
-- [ ] Persistent **high score** (`PlayerPrefs`)
-- [ ] **Main menu** scene
-- [ ] In-game **pause menu** (Continue / Restart / Quit)
+- [x] Persistent **high score** (`PlayerPrefs`)
+- [x] **Main menu** scene
+- [x] In-game **pause menu** (Continue / Restart / Quit)
 - [ ] Support for a **second spike** on a single platform
 - [ ] **Sprites and a background** art pass
 - [ ] **WebGL build** hosted on itch.io for in-browser play
