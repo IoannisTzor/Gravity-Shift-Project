@@ -57,4 +57,11 @@ public class PlatformDecorator : MonoBehaviour
                 Instantiate(CoinPrefab, new Vector2(coinX ,transform.position.y + PlatHeight * ySign),rotation);  
             }
     }
+    float TakeRandomSlot(List<float> slots)
+    {
+        int choice = Random.Range(0, slots.Count);
+        float xPos = slots[choice];
+        slots.RemoveAt(choice);
+        return xPos;
+    }    
 }
