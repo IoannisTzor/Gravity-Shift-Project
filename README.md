@@ -86,9 +86,14 @@ Planned next features:
 - [x] Persistent **high score** (`PlayerPrefs`)
 - [x] **Main menu** scene
 - [x] In-game **pause menu** (Continue / Restart / Quit)
-- [ ] Support for a **second spike** on a single platform
-- [ ] **Sprites and a background** art pass
+- [x] Support for a **second spike** on a single platform (slot system)
+- [ ] **Ceiling + floor hazards** — chance to mirror spikes onto the opposite surface, forcing gravity flips to thread through
+- [ ] **Forced-flip zones** — trigger areas that flip the player's gravity automatically
+- [ ] **Coin combo multiplier** — consecutive coin pickups ramp a score multiplier
+- [ ] **Sprites and a parallax background** art pass
 - [ ] **WebGL build** hosted on itch.io for in-browser play
+- [ ] *(post-launch)* **Coin shop / unlockable skins** — spend banked coins on cosmetics
+- [ ] *(post-launch)* **Achievements / missions** — e.g. survive 60s, flip 30 times, collect 50 coins
 ---
  
 ## Background
