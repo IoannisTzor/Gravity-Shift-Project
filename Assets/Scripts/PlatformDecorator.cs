@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlatformDecorator : MonoBehaviour
 {
@@ -11,12 +12,22 @@ public class PlatformDecorator : MonoBehaviour
 
     public GameObject HazardPrefab;
     public GameObject CoinPrefab;
+    public int slotCount = 4;
+    public float slotWidth =0;
+    public float leftEdge = 0f;
 
     private float ySign = 0;
     private Quaternion rotation;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        slotWidth = (PlatWidth * 2) / slotCount;
+        List<float> slots = new List<float>();
+        leftEdge = transform.position.x - PlatWidth;
+        for (int i = 0; i < slotCount; i++)
+        {
+            slots.Add(leftEdge + (i + 0.5f) * slotWidth);
+        }
         int roll1 = Random.Range(0, 100);
         int roll2 = Random.Range(0, 100);
         spikeX = Random.Range(transform.position.x - PlatWidth, transform.position.x + PlatWidth);
