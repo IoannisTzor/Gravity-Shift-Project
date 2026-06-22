@@ -6,9 +6,8 @@ public class PlatformDecorator : MonoBehaviour
     public float PlatWidth = 2f;
     public float PlatHeight = 0.55f;
     private float spikeX =0f;
+    private float spike2X =0f;
     private float coinX=0f;
-    public float minGap = 1f;
-    private float retries = 0;
 
     public GameObject HazardPrefab;
     public GameObject CoinPrefab;
@@ -30,8 +29,8 @@ public class PlatformDecorator : MonoBehaviour
         }
         int roll1 = Random.Range(0, 100);
         int roll2 = Random.Range(0, 100);
-        spikeX = Random.Range(transform.position.x - PlatWidth, transform.position.x + PlatWidth);
-        coinX = Random.Range(transform.position.x - PlatWidth, transform.position.x + PlatWidth);
+        int roll3 = Random.Range(0, 100);
+
         
         if (transform.position.y <= 0)
             {
@@ -43,17 +42,19 @@ public class PlatformDecorator : MonoBehaviour
                 ySign = -1f;
                 rotation = Quaternion.Euler(0, 0, 180);
             }
-        if (roll1 >= 70)
+        if (roll1 >= 60)
             {
+                spikeX = TakeRandomSlot(slots);
                 Instantiate(HazardPrefab, new Vector2(spikeX ,(transform.position.y + (PlatHeight - 0.10f) * ySign) ),rotation);
-                while (Mathf.Abs(coinX - spikeX)< minGap && retries < 100)
-                    {
-                    coinX = Random.Range(transform.position.x - PlatWidth, transform.position.x + PlatWidth);
-                    retries +=1;
-                    }
+            }
+        if (roll3 >= 75)
+            {
+                spike2X = TakeRandomSlot(slots);
+                Instantiate(HazardPrefab, new Vector2(spike2X ,(transform.position.y + (PlatHeight - 0.10f) * ySign) ),rotation);
             }
         if (roll2 >= 55)
             {
+                coinX = TakeRandomSlot(slots);
                 Instantiate(CoinPrefab, new Vector2(coinX ,transform.position.y + PlatHeight * ySign),rotation);  
             }
     }
