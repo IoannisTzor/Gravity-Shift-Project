@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 public class PlatformDecorator : MonoBehaviour
 {
@@ -12,18 +13,22 @@ public class PlatformDecorator : MonoBehaviour
     public int slotCount = 6;
     public float slotWidth =0;
     public float leftEdge = 0f;
+    public float maxOffset = 40;
+    public float rampFactor = 0.3;
 
     private float ySign = 0;
     private float yFSign = 0;
     private Quaternion rotation;
     private Quaternion fRotation;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         slotWidth = (PlatWidth * 2) / slotCount;
         List<float> slots = new List<float>();
         leftEdge = transform.position.x - PlatWidth;
-        
+        float score = GameManager.Instance.ScoreGet();
+        float offset = Mathf.Min(maxOffset, score * rampFactor);   // capped so it can't run away
         for (int i = 0; i < slotCount; i++)
         {
             slots.Add(leftEdge + (i + 0.5f) * slotWidth);
@@ -49,17 +54,17 @@ public class PlatformDecorator : MonoBehaviour
                 rotation = Quaternion.Euler(0, 0, 180);
                 fRotation = Quaternion.identity;
             }
-        if (roll1 >= 60)
+        if (roll1 >= 60 - offset)
             {
                 SpawnSpike(slots,ySign,rotation);
                 spikeNum++;
             }
-        if (roll3 >= 75)
+        if (roll3 >= 75 - offset)
             {
                 SpawnSpike(slots,ySign,rotation);
                 spikeNum++;
             }
-        if (roll2 >= 55)
+        if (roll2 >= 55 - offset)
             {
                 coinX = TakeRandomSlot(slots);
                 Instantiate(CoinPrefab, new Vector2(coinX ,transform.position.y + PlatHeight * ySign),rotation);  
