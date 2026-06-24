@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 
 public class PlatformDecorator : MonoBehaviour
 {
@@ -13,8 +12,8 @@ public class PlatformDecorator : MonoBehaviour
     public int slotCount = 6;
     public float slotWidth =0;
     public float leftEdge = 0f;
-    public float maxOffset = 40;
-    public float rampFactor = 0.3;
+    public float maxOffset = 40f;
+    public float rampFactor = 0.3f;
 
     private float ySign = 0;
     private float yFSign = 0;
