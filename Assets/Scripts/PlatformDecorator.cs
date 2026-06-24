@@ -63,12 +63,12 @@ public class PlatformDecorator : MonoBehaviour
                 SpawnSpike(slots,ySign,rotation);
                 spikeNum++;
             }
-        if (roll2 >= 55 - offset)
+        if (roll2 >= 55 )
             {
                 coinX = TakeRandomSlot(slots);
                 Instantiate(CoinPrefab, new Vector2(coinX ,transform.position.y + PlatHeight * ySign),rotation);  
             }
-        if (roll4 >= 80)
+        if (roll4 >= 80 - offset)
         {
             for (int i = 0; i < spikeNum; i++)
             {

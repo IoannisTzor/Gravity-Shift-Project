@@ -167,6 +167,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlatformDecorator
   PlatWidth: 2
   PlatHeight: 0.65
-  minGap: 1
   HazardPrefab: {fileID: 1615055439691225964, guid: 1041118518c8cc24da35d8b6782b39c7, type: 3}
   CoinPrefab: {fileID: 1455189220624518822, guid: 62c5d704b893b5f4499bfa688f2516ff, type: 3}
+  slotCount: 6
+  slotWidth: 0
+  leftEdge: 0
+  maxOffset: 40
+  rampFactor: 0.3
