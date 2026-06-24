@@ -5,24 +5,25 @@ public class PlatformDecorator : MonoBehaviour
 {
     public float PlatWidth = 2f;
     public float PlatHeight = 0.55f;
-    private float spikeX =0f;
-    private float spike2X =0f;
     private float coinX=0f;
 
     public GameObject HazardPrefab;
     public GameObject CoinPrefab;
-    public int slotCount = 4;
+    public int slotCount = 6;
     public float slotWidth =0;
     public float leftEdge = 0f;
 
     private float ySign = 0;
+    private float yFSign = 0;
     private Quaternion rotation;
+    private Quaternion fRotation;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         slotWidth = (PlatWidth * 2) / slotCount;
         List<float> slots = new List<float>();
         leftEdge = transform.position.x - PlatWidth;
+        
         for (int i = 0; i < slotCount; i++)
         {
             slots.Add(leftEdge + (i + 0.5f) * slotWidth);
@@ -30,33 +31,46 @@ public class PlatformDecorator : MonoBehaviour
         int roll1 = Random.Range(0, 100);
         int roll2 = Random.Range(0, 100);
         int roll3 = Random.Range(0, 100);
+        int roll4 = Random.Range(0, 100);
+        int spikeNum = 0;
 
         
         if (transform.position.y <= 0)
             {
                 ySign = 1f;
+                yFSign = -1f;
                 rotation = Quaternion.identity;
+                fRotation = Quaternion.Euler(0, 0, 180);
             }
         else
             {
                 ySign = -1f;
+                yFSign = 1f;
                 rotation = Quaternion.Euler(0, 0, 180);
+                fRotation = Quaternion.identity;
             }
         if (roll1 >= 60)
             {
-                spikeX = TakeRandomSlot(slots);
-                Instantiate(HazardPrefab, new Vector2(spikeX ,(transform.position.y + (PlatHeight - 0.10f) * ySign) ),rotation);
+                SpawnSpike(slots,ySign,rotation);
+                spikeNum++;
             }
         if (roll3 >= 75)
             {
-                spike2X = TakeRandomSlot(slots);
-                Instantiate(HazardPrefab, new Vector2(spike2X ,(transform.position.y + (PlatHeight - 0.10f) * ySign) ),rotation);
+                SpawnSpike(slots,ySign,rotation);
+                spikeNum++;
             }
         if (roll2 >= 55)
             {
                 coinX = TakeRandomSlot(slots);
                 Instantiate(CoinPrefab, new Vector2(coinX ,transform.position.y + PlatHeight * ySign),rotation);  
             }
+        if (roll4 >= 80)
+        {
+            for (int i = 0; i < spikeNum; i++)
+            {
+                SpawnSpike(slots,yFSign,fRotation);
+            }
+        }
     }
     float TakeRandomSlot(List<float> slots)
     {
@@ -65,4 +79,9 @@ public class PlatformDecorator : MonoBehaviour
         slots.RemoveAt(choice);
         return xPos;
     }    
+    void SpawnSpike(List<float> slots, float ySign, Quaternion rotation)
+    {
+        float x = TakeRandomSlot(slots);
+        Instantiate(HazardPrefab, new Vector2(x ,transform.position.y + (PlatHeight - 0.10f) * ySign ),rotation);
+    }
 }
