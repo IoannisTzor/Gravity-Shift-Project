@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class PlatformDecorator : MonoBehaviour
 {
-    public float PlatWidth = 2f;
-    public float PlatHeight = 0.55f;
+    public float PlatWidth = 2.25f;
+    public float PlatHeight = 0.45f;
     private float coinX=0f;
 
     public GameObject HazardPrefab;
@@ -86,6 +86,6 @@ public class PlatformDecorator : MonoBehaviour
     void SpawnSpike(List<float> slots, float ySign, Quaternion rotation)
     {
         float x = TakeRandomSlot(slots);
-        Instantiate(HazardPrefab, new Vector2(x ,transform.position.y + (PlatHeight - 0.10f) * ySign ),rotation);
+        Instantiate(HazardPrefab, new Vector2(x ,transform.position.y + (PlatHeight - 0.20f) * ySign ),rotation);
     }
 }
