@@ -22,6 +22,8 @@ Example:
 - **Flip gravity** to jump between platforms above and below you.
 - **Collect coins** for bonus points (each coin is worth 5× a second of survival).
 - **Instant death** — there are no lives. Touching a spike, or leaving the camera's view (falling off the left edge, top, or bottom), ends the run immediately with an explosion.
+- **Forced-flip zones** — scrolling bands that flip your gravity for you as you pass through, throwing off your rhythm.
+- **It gets harder as you go** — spikes (including double-sided ones) and flip zones grow more frequent the higher your score climbs.
 - Your score is a single combined number: `survival time + coins × 5`.
 ### Controls
  
@@ -57,10 +59,12 @@ The game is driven by a handful of focused scripts in `Assets/Scripts`, each wit
 ### Hazards & rewards
 - **`HazardBehaviour`** — on spikes/enemies. If the player collides with it, it calls `GameManager.GameOver()`.
 - **`TargetBehaviour`** — on coins. When the player collides, it adds to the score and destroys itself.
+- **`ForcedFlipZone`** — on a trigger volume (a visible band the player can see coming). When the player enters, it calls the player's `FlipGravity()`, forcing a gravity flip whether they like it or not.
 ### Procedural platforms
 - **`PlatformSpawner`** — distance-based spawner. Each time the camera travels a set gap, it instantiates a platform just off the right edge of the screen at a random height. Spawning is anchored to the camera's real view edge and seeded from the last hand-placed starting platform so the world flows seamlessly from designed into random.
 - **`PlatformCleanup`** — on the platform prefab. Each platform destroys itself once it's far enough behind the camera, so dead platforms don't pile up.
-- **`PlatformDecorator`** — on the platform prefab. Rolls independent dice to optionally place a spike and/or a coin on the platform. High platforms place items on their underside (with the sprite flipped) for flipped-gravity play; low platforms place them on top. A retry loop keeps a coin from spawning too close to a spike.
+- **`PlatformDecorator`** — on the platform prefab. Splits the platform into evenly-spaced **slots** and claims a distinct slot per object (so overlap is structurally impossible — no distance checks). Rolls dice to place up to two spikes and a coin; high platforms place items on the underside (sprite flipped) for flipped-gravity play, low platforms on top. With some chance it **mirrors** the same number of spikes onto the opposite surface (forcing flips to thread through). Spike/mirror chances ramp with score via a clamped offset.
+- **`ForcedFlipZoneSpawner`** — distance-based like the platform spawner but on a much larger gap, spawning full-height flip zones occasionally. Each opportunity rolls a score-ramped chance, so zones grow more frequent as the run goes on. Zones reuse `PlatformCleanup` to self-destruct behind the camera.
 ### UI
 - **`UiManager`** — a singleton that owns all UI: the live score readout during play, and the Game Over panel (hidden until death) showing the final score. Also provides `RestartGame()`, which reloads the active scene.
 ---
@@ -87,8 +91,8 @@ Planned next features:
 - [x] **Main menu** scene
 - [x] In-game **pause menu** (Continue / Restart / Quit)
 - [x] Support for a **second spike** on a single platform (slot system)
-- [ ] **Ceiling + floor hazards** — chance to mirror spikes onto the opposite surface, forcing gravity flips to thread through
-- [ ] **Forced-flip zones** — trigger areas that flip the player's gravity automatically
+- [x] **Ceiling + floor hazards** — chance to mirror spikes onto the opposite surface, forcing gravity flips to thread through
+- [x] **Forced-flip zones** — trigger areas that flip the player's gravity automatically
 - [ ] **Coin combo multiplier** — consecutive coin pickups ramp a score multiplier
 - [ ] **Sprites and a parallax background** art pass
 - [ ] **WebGL build** hosted on itch.io for in-browser play
