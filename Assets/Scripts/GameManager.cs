@@ -60,9 +60,13 @@ public class GameManager : MonoBehaviour
     {
         return coinScore;
     }
-    public int ComboScore()
+    public float ComboScore()
     {
         return (1 + Combo * 0.5f);
+    }
+    public int RawCombo()
+    {
+        return Combo;
     }
     public void ResetCombo()
     {

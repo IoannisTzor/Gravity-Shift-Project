@@ -5,6 +5,7 @@ using System.Collections;
 public class UiManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI comboText;
     public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI timerText;
@@ -80,6 +81,14 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         scoreText.text = "Score: "+ Mathf.FloorToInt(GameManager.Instance.ScoreGet());
+        if (GameManager.Instance.RawCombo() <= 1)
+        {
+            comboText.text = "";
+        }
+        else
+        {
+        comboText.text = "x" + GameManager.Instance.ComboScore().ToString("F1");
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
