@@ -20,7 +20,7 @@ Example:
  
 - The **camera auto-scrolls right** and accelerates the longer you survive, so the pressure ramps up over time.
 - **Flip gravity** to jump between platforms above and below you.
-- **Collect coins** for bonus points (each coin is worth 5× a second of survival).
+- **Collect coins** for bonus points — grabbing them in a row builds a **combo multiplier**, but let one scroll past and the streak resets.
 - **Instant death** — there are no lives. Touching a spike, or leaving the camera's view (falling off the left edge, top, or bottom), ends the run immediately with an explosion.
 - **Forced-flip zones** — scrolling bands that flip your gravity for you as you pass through, throwing off your rhythm.
 - **It gets harder as you go** — spikes (including double-sided ones) and flip zones grow more frequent the higher your score climbs.
@@ -58,7 +58,7 @@ The game is driven by a handful of focused scripts in `Assets/Scripts`, each wit
 - **`BoundaryCheck`** — lives on the camera and ends the game if the player leaves the visible area, using the camera's real orthographic size (half-width / half-height) plus a grace buffer rather than hard-coded numbers.
 ### Hazards & rewards
 - **`HazardBehaviour`** — on spikes/enemies. If the player collides with it, it calls `GameManager.GameOver()`.
-- **`TargetBehaviour`** — on coins. When the player collides, it adds to the score and destroys itself.
+- **`TargetBehaviour`** — on coins. Collecting one adds to the score and builds a **combo multiplier**; letting a coin scroll off-screen uncollected resets the combo (a collected coin is destroyed on pickup, so it can never trigger the miss-check).
 - **`ForcedFlipZone`** — on a trigger volume (a visible band the player can see coming). When the player enters, it calls the player's `FlipGravity()`, forcing a gravity flip whether they like it or not.
 ### Procedural platforms
 - **`PlatformSpawner`** — distance-based spawner. Each time the camera travels a set gap, it instantiates a platform just off the right edge of the screen at a random height. Spawning is anchored to the camera's real view edge and seeded from the last hand-placed starting platform so the world flows seamlessly from designed into random.
@@ -93,7 +93,7 @@ Planned next features:
 - [x] Support for a **second spike** on a single platform (slot system)
 - [x] **Ceiling + floor hazards** — chance to mirror spikes onto the opposite surface, forcing gravity flips to thread through
 - [x] **Forced-flip zones** — trigger areas that flip the player's gravity automatically
-- [ ] **Coin combo multiplier** — consecutive coin pickups ramp a score multiplier
+- [x] **Coin combo multiplier** — consecutive coin pickups ramp a score multiplier (resets if you let a coin scroll past)
 - [ ] **Sprites and a parallax background** art pass
 - [ ] **WebGL build** hosted on itch.io for in-browser play
 - [ ] *(post-launch)* **Coin shop / unlockable skins** — spend banked coins on cosmetics
