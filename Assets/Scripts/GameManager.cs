@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private float survivalTime = 0f;     
 
     private float coinValue = 1f; 
+    private int Combo = 0;
 
     private float coinScore = 0f;
     public GameObject player;
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     }
     public void addCoin()
     {
-        coinScore +=  coinValue;
+        coinScore +=  coinScore += coinValue * (1 + combo * 0.5f);
     }
 
     public void GameOver()               
@@ -57,6 +58,15 @@ public class GameManager : MonoBehaviour
     {
         return coinScore;
     }
+    public void AddCoin()
+    {
+        Combo +1;
+    }
+    public void ResetCombo()
+    {
+        Combo = 0;
+    }
+
 
 
 }
