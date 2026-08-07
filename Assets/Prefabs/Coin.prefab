@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 417866162433345902}
   - component: {fileID: 7182066199399163295}
   - component: {fileID: 1825006198527567498}
-  - component: {fileID: 3578720098968458314}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -142,16 +141,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4e064d3ff227a47a627acfe2554dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetBehavior
---- !u!114 &3578720098968458314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1455189220624518822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55c0a4cda0931a34d9bcea86b7a02d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlatformCleanup
-  CamSize: 0

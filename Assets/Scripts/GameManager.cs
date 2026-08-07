@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour
     }
     public void addCoin()
     {
-        coinScore +=  coinScore += coinValue * (1 + combo * 0.5f);
+        coinScore +=  coinValue * (1 + Combo * 0.5f);
+        Combo ++;
+        Debug.Log("Combo = "+ Combo);
     }
 
     public void GameOver()               
@@ -58,14 +60,16 @@ public class GameManager : MonoBehaviour
     {
         return coinScore;
     }
-    public void AddCoin()
+    public int ComboScore()
     {
-        Combo +1;
+        return (1 + Combo * 0.5f);
     }
     public void ResetCombo()
     {
         Combo = 0;
+        Debug.Log("Combo reset to" + Combo );
     }
+    
 
 
 
